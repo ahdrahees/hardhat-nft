@@ -31,9 +31,6 @@ module.exports = {
         player_1: {
             default: 1,
         },
-        player_2: {
-            default: 2,
-        },
     },
     defaultNetwork: "hardhat",
     networks: {
@@ -85,9 +82,4 @@ module.exports = {
     mocha: {
         timeout: 500000, // 500 seconds max for running tests
     },
-}
-
-/** @type import('hardhat/config').HardhatUserConfig */
-module.exports = {
-    solidity: "0.8.18",
 }
