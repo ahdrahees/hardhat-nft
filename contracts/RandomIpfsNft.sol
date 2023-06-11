@@ -15,16 +15,16 @@ error RandomIpfsNft__FailedToWithdrawEth();
 contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, ConfirmedOwner {
     // when we mint a Nft, we will trigger a chainlink VRF call to get us a random number
     // using that number we will get a random Nft
-    // PUG, shiba inu, St, Bernard
+    // POODLE, DALMATIAN, PARIAH
 
     // users have to pay to mint a nft
     // the owner of the contract can withdraw the ETH
 
     // Type declaration
     enum Breed {
-        PUG,
-        SHIBA_INU,
-        ST_BERNARD
+        POODLE,
+        DALMATIAN,
+        PARIAH
     }
 
     // Chainlink VRF variables
@@ -85,12 +85,12 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, ConfirmedOwner {
         address nftOwner = s_requestIdToSender[requestId];
         uint256 newTokenId = s_tokenCounter;
         uint256 moddedRng = randomWords[0] % MAX_CHANCE_VALUE; // get number between 0-99
-        // 7 -> PUG
-        // 88 -> bernad
-        // 15 -> shiba inu
+        // 7 -> POODLE
+        // 88 -> PARIAH
+        // 15 -> DALMATIAN
         Breed dogBreed = getBreedFromModdedRng(moddedRng);
         _safeMint(nftOwner, newTokenId);
-        _setTokenURI(newTokenId, s_dogTokenURIs[uint256(dogBreed)]); // uint256(dogBreed) value will be 0 if it is PUG or 1 if it is  SHIBA_INU 0r 3 if ST_BERNARD. // casting it back into uint256
+        _setTokenURI(newTokenId, s_dogTokenURIs[uint256(dogBreed)]); // uint256(dogBreed) value will be 0 if it is POODLE or 1 if it is  DALMATIAN 0r 3 if PARIAH. // casting it back into uint256
 
         s_tokenCounter = s_tokenCounter + 1;
         emit NftMinted(dogBreed, nftOwner);
@@ -122,7 +122,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, ConfirmedOwner {
     }
 
     function getChanceArray() public pure returns (uint256[3] memory) {
-        return [10, 30, MAX_CHANCE_VALUE]; // 10 % super rare PUG, 40% (10+30) rare Shiba inu, 60% common st' bernard
+        return [10, 30, MAX_CHANCE_VALUE]; // 10 % super rare POODLE, 40% (10+30) rare DALMATIAN, 60% common PARIAH
     }
 
     function getMintFee() public view returns (uint256) {
