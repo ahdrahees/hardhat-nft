@@ -105,14 +105,16 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, ConfirmedOwner {
         }
     }
 
+    // This function give  which tokenUri index( which is the dogbreed) we are going to use based on the rarity of the nft and  moddedRng
     function getBreedFromModdedRng(uint256 moddedRng) public pure returns (Breed) {
-        uint256 cummulativeSum = 0;
+        uint256 cumulativeSum = 0;
         uint256[3] memory chanceArray = getChanceArray();
         for (uint256 i = 0; i < chanceArray.length; i++) {
-            if (moddedRng >= cummulativeSum && moddedRng < cummulativeSum + chanceArray[i]) {
+            // here setting boundary condition for each breed moddedRng b/w 0-10, 11-30, 31-99
+            if (moddedRng >= cumulativeSum && moddedRng < chanceArray[i]) {
                 return Breed(i);
             }
-            cummulativeSum += chanceArray[i];
+            cumulativeSum = chanceArray[i];
         }
         revert RandomIpfsNft__RangeOutOfBounds(); // if some reason we dont return anything just revert
     }
