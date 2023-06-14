@@ -84,7 +84,7 @@ async function handleTokenUris() {
     // store metadata in ipfs
     num = 1
     for (imageUploadResponseIndex in imageUploadResponses) {
-        replaceThis = `0${num}-` // Using template literals to concatenate into 01-
+        replaceThis = `0${num}-` // Using template literals to concatenate into 01- , 02- , 03-
         // replaceThis = "0" + num + "-"    // Using concatenation operator (+): to concatenate into 01-
 
         let tokenUriMetadata = { ...metadataTemplate }
@@ -106,5 +106,3 @@ async function handleTokenUris() {
 }
 
 module.exports.tags = ["all", "randomIpfs", "main"]
-
-// for unit test
