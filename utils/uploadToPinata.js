@@ -7,14 +7,16 @@ const path = require("path")
 const fs = require("fs")
 
 async function storeImages(imagesFilePath) {
-    const fullImagesPath = path.resolve(imagesFilePath) // this will give the path (eg:- a/f/b.js ) of the file we input
-    const files = fs.readdirSync(fullImagesPath) // read entire directory
+    const fullImagesPath = path.resolve(imagesFilePath) //path.resolve() find the actual path of directory which is from "/Users/heaven/study-sol/hardhat-nft/images/randomNft .// Note: we imput imagesFilePath which is "./images/randomNft"
+    const files = fs.readdirSync(fullImagesPath) // Reads the contents of the entire directory.& returns an array contain file name of contents the directory
+    // console.log(fullImagesPath)
     console.log("Uploading to Pinata...")
     let responses = []
     for (fileIndex in files) {
         // console.log(`Working on ${fileIndex}...`)
         console.log(`Working on ${files[fileIndex]}`)
-        const readableStreamForFile = fs.createReadStream(`${fullImagesPath}/${files[fileIndex]}`)
+        console.log(`${fullImagesPath}/${files[fileIndex]}`)
+        const readableStreamForFile = fs.createReadStream(`${fullImagesPath}/${files[fileIndex]}`) // `${fullImagesPath}/${files[fileIndex]}` will give each image full file path eg: - "/Users/heaven/study-sol/hardhat-nft/images/randomNft/01-POODLE.jpeg"
         const options = {
             pinataMetadata: {
                 name: files[fileIndex],
