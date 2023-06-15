@@ -20,6 +20,7 @@
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
     "@openzeppelin/contracts": "^4.9.1",
+    "base64-sol": "^1.1.0",
     "ethers": "5.7.2"
   }
 }
