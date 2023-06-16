@@ -15,7 +15,7 @@ async function storeImages(imagesFilePath) {
     for (fileIndex in files) {
         // console.log(`Working on ${fileIndex}...`)
         console.log(`Working on ${files[fileIndex]}`)
-        console.log(`${fullImagesPath}/${files[fileIndex]}`)
+        // console.log(`${fullImagesPath}/${files[fileIndex]}`)
         const readableStreamForFile = fs.createReadStream(`${fullImagesPath}/${files[fileIndex]}`) // `${fullImagesPath}/${files[fileIndex]}` will give each image full file path eg: - "/Users/heaven/study-sol/hardhat-nft/images/randomNft/01-POODLE.jpeg"
         const options = {
             pinataMetadata: {
