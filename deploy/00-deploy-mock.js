@@ -1,5 +1,5 @@
 const { network, ethers } = require("hardhat")
-const { developmentChains } = require("../helper-hardhat-config")
+const { developmentChains, DECIMALS, INITIAL_ANSWER } = require("../helper-hardhat-config")
 
 module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deployer } = await getNamedAccounts()
@@ -9,9 +9,14 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const args = [_BASEFEE, _GASPRICELINK]
     if (developmentChains.includes(network.name)) {
         log("\nLocal network is detected! Deploying mocks....")
-        const vrfCoordinatorV2Mock = await deploy("VRFCoordinatorV2Mock", {
+        await deploy("VRFCoordinatorV2Mock", {
             from: deployer,
             args: args,
+            log: true,
+        })
+        await deploy("MockV3Aggregator", {
+            from: deployer,
+            args: [DECIMALS, INITIAL_ANSWER],
             log: true,
         })
         log("___________________________Mock_deployed______________________")
